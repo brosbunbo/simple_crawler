@@ -1,0 +1,48 @@
+<div class="container">
+  <form class="form-inline mt-3 mb-3">
+    <label class="mr-2" for="page-number">Page</label>
+    <input type="number" class="form-control form-control-sm mr-2" id="page-number" ng-model="$ctrl.page">
+    <label class="mr-2" for="category">Category</label>
+    <select id="category" class="form-control form-control-sm mr-2"
+      ng-model="$ctrl.categoryId"
+      ng-options="item.id as item.name for item in $ctrl.categories track by item.id"
+    >
+      <option value="">ALL</option>
+    </select>
+    <button type="button" class="btn btn-sm btn-primary" ng-click="$ctrl.crawl()">Crawl</button>
+  </form>
+
+  <div class="table-responsive">
+    <h5 ng-if="$ctrl.msg">{{ $ctrl.msg }}</h5>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <th>#</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th width="100">Stars</th>
+        <th width="100">Price</th>
+        <th width="100">In Stock</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in $ctrl.books track by $index">
+          <td>{{ $index + 1 }}</td>
+          <td>
+            <div class="book-image" style="background-image: url('{{ item.image  }}')"></div>
+          </td>
+          <td>
+            {{ item.name }}
+          </td>
+          <td class="text-center">
+            {{ item.stars }}
+          </td>
+          <td class="text-rigth">
+            £{{ item.price }}
+          </td>
+          <td class="text-center">
+            {{ item.in_stock ? 'Yes' : 'No' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
